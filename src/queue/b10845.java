@@ -16,8 +16,8 @@ import java.util.StringTokenizer;
  * back: 큐의 가장 뒤에 있는 정수를 출력한다. 만약 큐에 들어있는 정수가 없는 경우에는 -1을 출력한다.
  */
 
-// Deque 없이 구현 해보고 싶었는데 ArrayList 사용 시 remove(0)에서 시간 초과가 발생함.
-// LinkedList나 Deque 사용할 것
+// Deque 사용하지 않고 ArrayList를 이용하여 구현함.
+// LinkedList나 Deque로도 구현 해 볼 것.
 public class b10845 {
     private ArrayList<Integer> queue;
 
