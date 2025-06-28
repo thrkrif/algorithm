@@ -102,6 +102,14 @@ public class MyLinkedList<E> implements MyList<E>{
         return removedItem;
     }
 
+    @Override
+    public String toString() {
+        return "MyLinkedListV1{" +
+                "first=" + first +
+                ", size=" + size +
+                '}';
+    }
+
 
     private static class Node<E>{
         E item;
