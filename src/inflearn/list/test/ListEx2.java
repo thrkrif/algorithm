@@ -20,6 +20,25 @@ public class ListEx2 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
 
-        int n = Integer.parseInt(br.readLine());
+        System.out.println("n개의 정수를 입력하세요 (종료 0)");
+//        int n = Integer.parseInt(br.readLine());
+        while (true){
+            int num = Integer.parseInt(br.readLine());
+            if (num == 0) {
+                break;
+            }
+            list.add(num);
+        }
+
+        System.out.println("출력");
+        for (int i = 0; i < list.size(); i++){
+            if (i == list.size() - 1){
+                sb.append(list.get(i));
+                break;
+            }
+            sb.append(list.get(i)).append(",");
+        }
+        System.out.println(sb.toString());
+
     }
 }
