@@ -1,8 +1,12 @@
 package inflearn.set;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 
 // 해시 알고리즘을 사용하도록 개선
+// 해시 알고리즘을 사용한 덕분에 등록, 검색, 삭제 모두 평균 O(1)로 연산 속도를 크게 개선했다.
+// 마지막 남은 문제 : 지금 hashIndex는 숫자밖에 사용 못함. 문자는 어떻게 사용할건데?
+// 아스키코드, hashCode
 public class MyHashSetV1 {
 
     private static final int DEFAULT_INITIAL_CAPACITY = 16;
@@ -62,7 +66,7 @@ public class MyHashSetV1 {
     }
 
     private int hashIndex(int value) {
-        return value % capacity;
+        return Math.abs(value) % capacity;
     }
 
     public boolean remove(int value){
@@ -77,4 +81,16 @@ public class MyHashSetV1 {
         }
     }
 
+    public int getSize(){
+        return size;
+    }
+
+    @Override
+    public String toString() {
+        return "MyHashSetV1{" +
+                "buckets=" + Arrays.toString(buckets) +
+                ", size=" + size +
+                ", capacity=" + capacity +
+                '}';
+    }
 }
