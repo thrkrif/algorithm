@@ -16,24 +16,55 @@ public class b17425 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
 
-        // 전처리 : 미리 g를 다 구해버리기
-        final int MAX_N = 1_000_000; // 문제에서 최대 입력이 10만이므로
-        long[] f = new long[MAX_N + 1];
+//        // 전처리 : 미리 g를 다 구해버리기
+//        final int MAX_N = 1_000_000; // 문제에서 최대 입력이 10만이므로
+//        long[] f = new long[MAX_N + 1];
+//        long[] g = new long[MAX_N + 1];
+//        f[0] = 0;
+//        g[0] = 0;
+//
+//        // 에라토스테네스의 체 : O(NlogN)
+//        for (int i = 1; i <= MAX_N; i++){
+//            for (int j = i; j <= MAX_N; j += i){
+//                f[j] += i;
+//            }
+//        }
+//        // O(N)
+//        for (int i = 1; i <= MAX_N; i++){
+//            g[i] = g[i - 1] + f[i];
+//        }
+//        // ======= 전처리 완료 ==========
+//
+//        int T = Integer.parseInt(br.readLine());
+//        for (int i = 1; i <= T; i++){
+//            int N = Integer.parseInt(br.readLine());
+//            sb.append(g[N]).append('\n');
+//        }
+//        System.out.println(sb);
+
+
+        /*
+         * f 구하지 않고 한 번에 g에 포함시켜서 계산하기
+         * 위의 방식과 2배 성능 차이가 난다.
+         */
+
+        final int MAX_N = 1_000_000;
         long[] g = new long[MAX_N + 1];
-        f[0] = 0;
         g[0] = 0;
 
-        // 에라토스테네스의 체 : O(NlogN)
         for (int i = 1; i <= MAX_N; i++){
             for (int j = i; j <= MAX_N; j += i){
-                f[j] += i;
+                g[j] += i; // 사실 이건 f[i]를 구한 것들임. 각 수들의 약수의 총합
             }
         }
-        // O(N)
+
         for (int i = 1; i <= MAX_N; i++){
-            g[i] = g[i - 1] + f[i];
+            g[i] += g[i-1];
+            /*
+             * g[i] = g[i] + g[i-1] 에서 우변의 g[i]는 f[i]와 같고 g[i-1]은 누적합임.
+             * 계산의 결과로 좌변의 g[i]가 실제 누적합으로 바뀜.
+             */
         }
-        // ======= 전처리 완료 ==========
 
         int T = Integer.parseInt(br.readLine());
         for (int i = 1; i <= T; i++){
@@ -42,6 +73,7 @@ public class b17425 {
         }
         System.out.println(sb);
 
+        // 시간 차이는 4ms, 메모리 차이는 8000kb로 f를 따로 구하지 않는게 성능이 더 좋긴함.
 
     }
 }
